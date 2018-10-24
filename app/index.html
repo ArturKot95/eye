@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="style.css">
+    <title>Eye Exercise</title>
+</head>
+<body ng-controller="bodyCtrl">
+
+<div ng-hide="playing" class="playBox">
+    <button class="btn btn-primary btn-lg" ng-click="play()">Play</button>
+    Wrong: {{wrongCount}} ({{numbersOut.length - wrongCount}}) {{((numbersOut.length - wrongCount) / numbersOut.length) * 100}}%
+</div>
+
+<div ng-show="playing">
+    <small>{{numbersIn.length}}/{{numbersOut.length}}</small>
+    <div class="well gameBox">
+        <span class="numberOut">{{numberOut}}</span>
+        <input type="number" ng-model="numberIn" class="numberInput"
+               ng-keyup="check($event)">
+    </div>
+</div>
+
+<div class="results">
+    <span class="result" ng-repeat="number in numbersIn track by $index"
+          ng-class="{good: number == numbersOut[$index], wrong: number != numbersOut[$index]}">
+    </span>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
